@@ -483,7 +483,7 @@ console.log(result); //10
 function showMessage() {
   console.log("Message 1");
 }
-function showMessage() {
+function showMessage1() {
   console.log("Message 2");
 }
 showMessage(); // Message 2 : function định nghĩa sau sẽ ghi đè function định nghĩa trước
@@ -1725,3 +1725,80 @@ function alert1(log, type='log') {
 var arrayDest = ['Javascript', 'Flutter', 'React', 'Angular']
 var [a,b,c] = arrayDest;
 console.log(a,b,c)//Javascript Flutter React  
+
+var courseSpread = {
+  name1: 'Javascript',
+  price: 1000,
+  image: 'image-address',
+  children: {
+    name1: 'Reactjs'
+  }
+}
+var {name1, ...rest} = courseSpread;
+console.log(name1)//Javascript
+console.log(rest)//{price: 1000, image: 'image-address'}
+
+var {name1: parentName, children:{name1}} = courseSpread;
+console.log(name1) //Reactjs
+
+var {description = 'default description'} = courseSpread;
+console.log(description) //default description 
+
+function Spread(...params) {
+  console.log(params)
+}
+console.log(Spread(1,2,3,4,5,6,7,8))//(8) [1, 2, 3, 4, 5, 6, 7, 8]
+
+//Rest parameter
+function restFunc({name, price, ...rest}){
+  console.log(name) //JS
+  console.log(price) //1000
+  console.log(rest) //{description: 'Description content'}
+}
+restFunc({
+  name: 'JS',
+  price: 1000,
+  description: 'Description content'
+})
+
+//Spread operator
+var defaultConfig = {
+  api: 'https://domain-trang-khoa-hoc',
+  apiVersion: 'v1',
+  other: 'other'
+}
+var exerciseConfig = {
+  ...defaultConfig,
+  api: 'https://domain-trang-bai-tap'
+}
+console.log(exerciseConfig) //{api: 'https://domain-trang-bai-tap', apiVersion: 'v1', other: 'other'}
+
+
+var arraySR = ['Angular', 'React', 'Vue', 'Flutter']
+//đây là rest vì truyền vào tham số
+function spreadRest(...rest) {
+  for (var i = 0; i < rest.length; i ++) {
+    console.log(rest[i])
+  }
+}
+//đây là spread vì đây là truyền đối số
+spreadRest(...arraySR) // Angular React Vue Flutter
+
+//Tagged template literals
+function highLight([first, ...strings], ...values) {
+  //console.log('first: ', first);//first:  Học lập trình
+  //console.log('strings: ', strings);//strings:  (2) [' tại ', '']
+  //console.log('values: ', values);//values:  (2) ['Javascript', 'F8']
+
+  return values.reduce(
+    (acc, curr) => [...acc,`<span>${curr}</span>`, strings.shift()],
+    [first]
+  )
+  .join('')
+}
+var brand = 'F8'
+var course = 'Javascript'
+const html1 = highLight`Học lập trình ${course} tại ${brand}!`
+console.log(html1)//Học lập trình <span>Javascript</span> tại <span>F8</span>!
+
+
