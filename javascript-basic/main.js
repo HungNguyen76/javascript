@@ -1539,7 +1539,6 @@ console.log(JSON.stringify(["Javascript", "PHP"])); //["Javascript","PHP"] : str
 //         console.log(error) //Co loi!
 //     })
 
-
 /** ES6
  * 1. Let, const
  * 2. Template Literals
@@ -1555,54 +1554,54 @@ console.log(JSON.stringify(["Javascript", "PHP"])); //["Javascript","PHP"] : str
  * 12. Modules
  */
 
-//1. Var / Let, Const: Scope, Hoisting 
+//1. Var / Let, Const: Scope, Hoisting
 //2. Const / Var, Let: Assignment
 //Code block: if else, loop, {}...
 
-if(true){
-    var course = 'Javascript'
+if (true) {
+  var course = "Javascript";
 }
-console.log(course) // Javascript
+console.log(course); // Javascript
 
-if(true){
-    const coursePHP = 'PHP'
+if (true) {
+  const coursePHP = "PHP";
 }
 //console.log(coursePHP) //Uncaught ReferenceError: coursePHP is not defined
 
 {
-    let courseJava = 'Java'
+  let courseJava = "Java";
+  {
     {
-        {
-            console.log(courseJava) //Java : truy cập được vì let nằm trong khối {} lớn
-        }
+      console.log(courseJava); //Java : truy cập được vì let nằm trong khối {} lớn
     }
+  }
 }
 {
-    const courseDart = 'Dart'
+  const courseDart = "Dart";
+  {
     {
-        {
-            const courseDart = '.Net' //courseDart không bị trùng
-            console.log(courseDart) //.Net : ưu tiên block gần nhất
-        }
+      const courseDart = ".Net"; //courseDart không bị trùng
+      console.log(courseDart); //.Net : ưu tiên block gần nhất
     }
+  }
 }
 //Hoisting
 e = 1;
-var e; 
-console.log(e) //1
-// sẽ hoisting lên đầu var e; 
+var e;
+console.log(e); //1
+// sẽ hoisting lên đầu var e;
 //chỉ có var hỗ trợ hoisting, const let ko được hoisting
 // t = 1;
 // let t;
 //console.log(t)//Uncaught SyntaxError: Identifier 't' has already been declared (at main.js:1596:5)
 
 const courseConst = {
-    name: 'Javascript'
-}
-courseConst.name = 'PHP' 
+  name: "Javascript",
+};
+courseConst.name = "PHP";
 //đây chi là thay đổi thuộc tính name cho object courseConst
 //chứ không phải gán lại chính thằng courseConst
-console.log(courseConst.name) //PHP
+console.log(courseConst.name); //PHP
 
 //Code thuần: var
 //Babel: const, let
@@ -1610,37 +1609,119 @@ console.log(courseConst.name) //PHP
 //khi cần gán lại giá trị cho biến : let
 
 //Arrow function
-const sum = (a,b) => a + b;
-console.log(sum(2,2)) //4
+const sum = (a, b) => a + b;
+console.log(sum(2, 2)); //4
 
-const sum2 = (a,b) => {
-    return {
-        a: a,
-        b: b
-    }
-}
+const sum2 = (a, b) => {
+  return {
+    a: a,
+    b: b,
+  };
+};
 //cách viết ngắn: const sum2 = (a,b) => ({a:a, b:b})
 
 const context = {
-    name: 'PHP',
-    getName: function() {
-        return this; //context
-    }
-}
-console.log(context.getName())//{name: 'PHP', getName: ƒ}
+  name: "PHP",
+  getName: function () {
+    return this; //context
+  },
+};
+console.log(context.getName()); //{name: 'PHP', getName: ƒ}
 
 const context1 = {
-    name: 'PHP',
-    getName: () => {
-        return this; //arrow function ko có context của chính nó, nên trả về object window
-    }
-}
-console.log(context1.getName())//Window {window: Window, self: Window, document: document, name: 'Hung Nguyen', location: Location, …}
+  name: "PHP",
+  getName: () => {
+    return this; //arrow function ko có context của chính nó, nên trả về object window
+  },
+};
+console.log(context1.getName()); //Window {window: Window, self: Window, document: document, name: 'Hung Nguyen', location: Location, …}
 
 //arrow function không có constuctor
 const Course3 = (name, price) => {
-    this.name = name;
-    this.price = price;
-}
+  this.name = name;
+  this.price = price;
+};
 //const jsCourse = new Course3('Golang', 1000)
 //console.log(jsCourse)//Uncaught TypeError: Course3 is not a constructor
+
+//Mutiline string
+const lines = "Line1\nLine2";
+console.log(lines); //Line1 Line2
+
+const lines2 = "Line1\n" + "Line2\n" + "Line3\n";
+console.log(lines2);
+
+const lines3 = `Line1
+Line2
+Line3`;
+console.log(lines3); //Line1 Line2 Line3: tự xuống hàng
+
+//Classes
+class CourseClass {
+  constructor(name, price) {
+    this.name = name;
+    this.price = price;
+  }
+  getName() {
+    return this.name;
+  }
+  getPrice() {
+    return this.price;
+  }
+  run() {
+    const isSuccess = false;
+  }
+}
+const netCourse = new CourseClass(".NET", 3000);
+const jsCourse = new CourseClass("Javascript", 4000);
+console.log(netCourse); //CourseClass {name: '.NET', price: 3000}
+console.log(jsCourse); //CourseClass {name: 'Javascript', price: 3000}
+
+//Enhanced object literals
+//1.Định nghĩa key: value cho object
+//2. Định nghĩa method cho object
+//3. Định nghĩa key cho object dưới dạng biến
+
+var nameGolang = 'Golang'
+var price = 1000;
+var courseEOL = {
+  nameGolang,
+  price,
+  getName() {
+    return nameGolang;
+  }
+}
+console.log(courseEOL)//{name: 'Golang', price: 1000}
+console.log(courseEOL.getName())//Golang
+
+var fieldName = 'name'
+var fieldPrice = 'price'
+const course7 = {
+  [fieldName] : 'Flutter',
+  [fieldPrice] : 1000
+}
+console.log(course7) //{name: 'Flutter', price: 1000}
+
+//Default parameter
+function defaultParam(param) {
+  if(typeof param === 'undefined') {
+    param = 'Gia tri mac dinh'
+  }
+  console.log(param)
+}
+defaultParam()//Gia tri mac dinh
+
+function defaultParamEs6( param = 'Default Value'){
+  console.log(param)
+}
+defaultParamEs6(undefined) //Default Value
+
+function alert1(log, type='log') {
+  console[type](log)
+}
+// alert1('Message...', 'error')
+
+//Destructuring
+var arrayDest = ['Javascript', 'Flutter', 'React', 'Angular']
+var [a,b,c] = arrayDest;
+console.log(a,b,c)//Javascript Flutter React  
