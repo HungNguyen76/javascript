@@ -1801,4 +1801,25 @@ var course = 'Javascript'
 const html1 = highLight`Học lập trình ${course} tại ${brand}!`
 console.log(html1)//Học lập trình <span>Javascript</span> tại <span>F8</span>!
 
-
+//Optional chaining (?.) dùng được cho object, array, function
+const obj = {
+  name: 'Alice',
+  cat: {
+    name : 'Dinah',
+    // cat2: {
+    //   name: 'Dinah2',
+    //   cat3: {
+    //     name: 'Dinah3'
+    //   }
+    // }
+  }
+}
+if(obj?.cat?.cat2?.cat3){
+console.log(obj.cat.cat2.cat3.name) //Dinah3
+}
+const objChain = {
+  getName(value){
+    console.log(value)
+  }
+}
+objChain.getName?.(123) //123
