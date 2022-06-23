@@ -971,12 +971,37 @@ console.log(newCourses); //(4) [{…}, {…}, {…}, {…}]
 //2: {id: 1, title: 'PHP'}
 //3: {id: 2, title: 'NodeJS'}
 
+//reduce khi hoạt động gọi lại callback và trả về 4 đối số
+//1. biến tích trữ 2.current value 3.current index 4.mảng gốc gọi tới reduce
+//có truyền initialValue hay không truyền chỉ khác nhau ở lần gọi đầu tiên  
+//nếu không truyền initialValue thì lần gọi đầu tiên lấy giá trị của first element của mảng
+//còn nếu truyền initialValue thì lần đầu tiện gọi callback sẽ lấy giá trị của initalValue
+
+//Tự tạo phương thức reduce
+Array.prototype.reduce2 = function(callback, initialValue){
+  let i = 0;
+  if(arguments.length < 2){
+    i = 1;
+    initialValue = this[0]
+  }
+  for(; i < this.length; i++){
+    initialValue = callback(initialValue, this[i], i, this)
+  }
+  return initialValue
+}
+const numbers = [1,2,3,4,5]
+const resultReduce = numbers.reduce2((total, number)=>{
+    return total + number
+},10)
+console.log('reduce ontapppppppp: ',resultReduce)
+
 //includes method: là phương thức của array và string
 var title = "Reponsive web design";
 console.log(title.includes("web")); //true
 
 var courses5 = ["JS", "PHP", "Dart"];
 console.log(courses5.includes("Dart")); //true
+
 
 /**
  * Math Object
@@ -1662,3 +1687,5 @@ const objChain = {
   }
 }
 objChain.getName?.(123) //123
+
+
