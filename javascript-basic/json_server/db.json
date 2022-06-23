@@ -1,0 +1,9 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "name": "Kiến thức cơ bản, tổng quan cho người mới bắt đầu",
+      "description": "Khoá học này sẽ giúp bạn nắm chắc tư tưởng cốt lõi của Javascript"
+    }
+  ]
+}
