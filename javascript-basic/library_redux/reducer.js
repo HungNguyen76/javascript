@@ -2,7 +2,6 @@ const init = {
     cars: ['BMW']
 }
 export default function reducer(state = init, action, args) {
-    console.log(action, args)
     switch(action) {
         case 'ADD':
             const [newCar] = args
@@ -16,8 +15,8 @@ export default function reducer(state = init, action, args) {
 }
 
 /**
- * cách vận hành: đầu tiên sẽ chạy vào file script  
- * file script sẽ import attach
+ * cách vận hành: đầu tiên sẽ chạy vào file main  
+ * file main sẽ import attach
  * attach sẽ truyền đối số là component và root
  * attach được import từ createStore
  * logic của attach: khi được thực thi sẽ set root là key và component là value
